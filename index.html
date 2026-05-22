@@ -268,8 +268,7 @@
                 link.click();
             });
         }
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-        <button onclick="exportAllToZip()">Download All Cards (.ZIP)</button>
+
         // --- ADMIN LOGIC ---
         function loadAdminTable() {
             const guests = getGuests();
@@ -401,31 +400,4 @@
             document.getElementById('reader').style.display = 'block';
             html5QrcodeScanner.render(onScanSuccess);
         }
-    </script>
-</body>
-</html>
-async function exportAllToZip() {
-    const zip = new JSZip();
-    const canvas = document.getElementById("yourCanvasId"); // Change to your canvas ID
-    
-    // Loop through every member in your database/array
-    for (let i = 0; i < registeredMembers.length; i++) {
-        const member = registeredMembers[i];
-        
-        // 1. Call your existing function that draws the card onto the canvas
-        drawMemberCard(member); 
-        
-        // 2. Turn the canvas drawing into an image data file
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-        
-        // 3. Drop it inside the zip folder named after the member
-        zip.file(`${member.name}_card.png`, blob);
-    }
-    
-    // 4. Package everything and trigger a single download
-    const zipContent = await zip.generateAsync({ type: "blob" });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(zipContent);
-    link.download = "Eid_Bondhu_Adda_2026_All_Cards.zip";
-    link.click();
-}
+ 
