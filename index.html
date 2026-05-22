@@ -172,9 +172,9 @@
             <h3 id="scanName" style="text-align: center;"></h3>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-                <button id="btnSnack1" class="action-btn" onclick="redeem('snack1')">Redeem Snack 1</button>
-                <button id="btnSnack2" class="action-btn" onclick="redeem('snack2')">Redeem Snack 2</button>
-                <button id="btnLunch" class="action-btn" style="grid-column: span 2; background: #8e44ad;" onclick="redeem('lunch')">Redeem Lunch</button>
+                <button id="btnCake" class="action-btn" onclick="redeem('Cake')">Redeem Cake</button>
+                <button id="btnCoffee" class="action-btn" onclick="redeem('Coffee')">Redeem Coffee</button>
+                <button id="btnLunch/Dinner" class="action-btn" style="grid-column: span 2; background: #8e44ad;" onclick="redeem('lunch/Dinner')">Redeem Lunch/Dinner</button>
             </div>
             <button onclick="restartScanner()" style="margin-top: 20px; width: 100%; padding: 10px;">Scan Next Person</button>
         </div>
@@ -279,9 +279,9 @@
                     <td>${g.name}</td>
                     <td>${g.phone}</td>
                     <td>${g.attended ? '✅' : '❌'}</td>
-                    <td>${g.snack1 ? 'Used' : '-'}</td>
-                    <td>${g.snack2 ? 'Used' : '-'}</td>
-                    <td>${g.lunch ? 'Used' : '-'}</td>
+                    <td>${g.Cake ? 'Used' : '-'}</td>
+                    <td>${g.Coffee ? 'Used' : '-'}</td>
+                    <td>${g.lunch/Dinner ? 'Used' : '-'}</td>
                 </tr>`;
             }
             html += "</table>";
@@ -360,13 +360,13 @@
         }
 
         function updateCouponButtons(guest) {
-            const btnS1 = document.getElementById('btnSnack1');
-            const btnS2 = document.getElementById('btnSnack2');
-            const btnLn = document.getElementById('btnLunch');
+            const btnS1 = document.getElementById('btnCake');
+            const btnS2 = document.getElementById('btnCoffee');
+            const btnLn = document.getElementById('btnLunch/Dinner');
 
-            setBtnState(btnS1, guest.snack1, "Snack 1");
-            setBtnState(btnS2, guest.snack2, "Snack 2");
-            setBtnState(btnLn, guest.lunch, "Lunch");
+            setBtnState(btnS1, guest.snack1, "Cake");
+            setBtnState(btnS2, guest.snack2, "Coffee");
+            setBtnState(btnLn, guest.lunch, "Lunch/Dinner");
         }
 
         function setBtnState(btn, isUsed, text) {
@@ -386,9 +386,9 @@
             const guests = getGuests();
             const guest = guests[currentScanId];
             
-            if(type === 'snack1') guest.snack1 = true;
-            if(type === 'snack2') guest.snack2 = true;
-            if(type === 'lunch') guest.lunch = true;
+            if(type === 'Cake') guest.Cake = true;
+            if(type === 'Coffee') guest.Coffee = true;
+            if(type === 'lunch/Dinner') guest.lunch/Dinner = true;
             
             saveGuest(guest);
             updateCouponButtons(guest);
